@@ -12,10 +12,12 @@ echo "Creating Subtitles for Open Shot."
 
 readarray -t Lines < lines.txt
 
+start=1
+
 for i in "${!Lines[@]}"
 do
     echo "i = $i, Line = ${Lines[$i]}"
-    create_subtitle $i "${Lines[$i]}"
+    create_subtitle $(($i+$start)) "${Lines[$i]}"
 done
 
 echo "Finished."
