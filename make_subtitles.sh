@@ -4,15 +4,19 @@
 create_subtitle() {
     sed s/Textholder/"${2}"/ <dummy.svg>subtitle-$1.svg
     inkscape \
-        --verb=EditSelectAll --verb=AlignHorizontalCenter \
+        --select=text5323 --verb=AlignHorizontalCenter \
         --verb FileSave --verb=FileQuit subtitle-$1.svg
 }
 
 echo "Creating Subtitles for Open Shot."
-
-readarray -t Lines < lines.txt
+LinesFile="lines.txt"
+echo "Reading File"
+readarray -t Lines<"$LinesFile"
+NumLines=$(wc -l < "$LinesFile")
 
 start=1
+echo "Creating Subtitles"
+echo "Total Lines = $NumLines"
 
 for i in "${!Lines[@]}"
 do
